@@ -4,7 +4,7 @@
 include_recipe "djbdns::internal_server"
 
 hosts = []
-search(:node, "*", %w(ipaddress fqdn dns_aliases)) {|n| hosts << n }
+search(:node, "*:*") {|n| hosts << n }
 
 template "/etc/tinydns-internal/root/zones/chef-server.zone" do
   source "tinydns-internal-data.erb"
