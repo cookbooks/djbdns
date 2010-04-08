@@ -1,3 +1,11 @@
+# Automatically generated via Chef
+
 <% @zones.each do |zone| %>
+<% if zone[:type] == 'A' %>
 =<%= zone[:fqdn] %>:<%= zone[:ipaddress] %>:300
+<% elsif zone[:type] == 'NS' %>
+<% zone[:nameservers].each do |hostname, ip| %>
+&<%= zone[:subdomain] %>:<%= ip %>:<%= hostname %>:<%= zone[:ttl] || "300" %>
+<% end %>
+<% end %>
 <% end %>

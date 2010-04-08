@@ -7,7 +7,7 @@ djbdns[:public_dnscache_ipaddress] = ipaddress unless djbdns.has_key?(:public_dn
 # Default allowed networks is the current network class B
 djbdns[:public_dnscache_allowed_networks] = [ipaddress.split(".")[0,2].join(".")] unless djbdns.has_key?(:public_dnscache_allowed_networks)
 # Reverse DNS (PTR) networks
-djbdns[:ptr_networks] = ['168.192', '28.172'] unless djbdns.has_key?(:ptr_networks)
+djbdns[:ptr_networks] = ['10.10', '172.16'] unless djbdns.has_key?(:ptr_networks)
 
 # this may not exist on a first run of chef-solo on ec2
 if attribute?("domain")
