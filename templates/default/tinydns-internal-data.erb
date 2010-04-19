@@ -18,8 +18,8 @@
 +ob-staging.<%= @node[:domain]%>:192.168.2.60:300
 <% @hosts.each do |host| %>
 =<%=host['fqdn']%>:<%= host['ipaddress'] %>:300
-<% if aliases = host['dns_aliases'] %>
-<% aliases.each do |al| %>
+<% if host['dns'] && host['dns']['aliases'] %>
+<% host['dns']['aliases'].each do |al| %>
 +<%= al %>.<%= @node[:domain] %>:<%= host['ipaddress'] %>:300
 <% end %>
 <% end %>

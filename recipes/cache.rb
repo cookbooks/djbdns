@@ -21,8 +21,10 @@ template "/etc/public-dnscache/log/run" do
   mode 0755
 end
 
-file "/etc/public-dnscache/root/ip/#{node[:djbdns][:public_dnscache_allowed_networks]}" do
-  mode 0644
+node[:djbdns][:public_dnscache_allowed_networks].each do |net|
+  file "/etc/public-dnscache/root/ip/#{net}" do
+    mode 0644
+  end
 end
 
 template "/etc/public-dnscache/root/servers/#{node[:djbdns][:tinydns_internal_resolved_domain]}" do

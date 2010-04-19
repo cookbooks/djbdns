@@ -31,7 +31,7 @@ end
 
 template "/etc/tinydns-internal/root/zones/static.zone" do
   source "static.zone.erb"
-  variables(:zones => search(:zones, "*:*"))
+  variables(:zones => search(:zones, "*:*"), :devices => search(:devices, "*:*"))
   notifies :run, resources("execute[build-tinydns-internal-data]")
   backup false
 end

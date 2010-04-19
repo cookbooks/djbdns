@@ -1,11 +1,13 @@
 # Automatically generated via Chef
 
+# Delegated zones
 <% @zones.each do |zone| %>
-<% if zone[:type] == 'A' %>
-=<%= zone[:fqdn] %>:<%= zone[:ipaddress] %>:300
-<% elsif zone[:type] == 'NS' %>
 <% zone[:nameservers].each do |hostname, ip| %>
 &<%= zone[:subdomain] %>:<%= ip %>:<%= hostname %>:<%= zone[:ttl] || "300" %>
 <% end %>
 <% end %>
+# Devices without chef clients
+
+<% @devices.each do |device| %>
+=<%= device[:fqdn] %>:<%= device[:ipaddress] %>:300
 <% end %>
