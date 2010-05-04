@@ -1,15 +1,8 @@
-djbdns Mash.new unless attribute?("djbdns")
-
-djbdns[:tinydns_ipaddress] = "127.0.0.1" unless djbdns.has_key?(:tinydns_ipaddress)
-djbdns[:tinydns_internal_ipaddress] = "127.0.0.1" unless djbdns.has_key?(:tinydns_internal_ipaddress)
-djbdns[:axfrdns_ipaddress] = "127.0.0.1" unless djbdns.has_key?(:axfrdns_ipaddress)
-djbdns[:public_dnscache_ipaddress] = ipaddress unless djbdns.has_key?(:public_dnscache_ipaddress)
+default.djbdns[:tinydns_ipaddress] = "127.0.0.1"
+default.djbdns[:tinydns_internal_ipaddress] = "127.0.0.1"
+default.djbdns[:axfrdns_ipaddress] = "127.0.0.1"
+default.djbdns[:public_dnscache_ipaddress] = node[:ipaddress]
 # Default allowed networks is the current network class B
-djbdns[:public_dnscache_allowed_networks] = [ipaddress.split(".")[0,2].join(".")] unless djbdns.has_key?(:public_dnscache_allowed_networks)
+default.djbdns[:public_dnscache_allowed_networks] = [node[:ipaddress].split(".")[0,2].join(".")]
 # Reverse DNS (PTR) networks
-djbdns[:ptr_networks] = ['10.10', '172.16'] unless djbdns.has_key?(:ptr_networks)
-
-# this may not exist on a first run of chef-solo on ec2
-if attribute?("domain")
-  djbdns[:tinydns_internal_resolved_domain] = domain unless djbdns.has_key?(:tinydns_internal_resolved_domain)
-end
+default.djbdns[:ptr_networks] = ['10.10', '172.16']

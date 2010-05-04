@@ -27,9 +27,16 @@ node[:djbdns][:public_dnscache_allowed_networks].each do |net|
   end
 end
 
-template "/etc/public-dnscache/root/servers/#{node[:djbdns][:tinydns_internal_resolved_domain]}" do
+template "/etc/public-dnscache/root/servers/#{node[:domain]}" do
   source "dnscache-servers.erb"
   mode 0644
+end
+
+search(:internal_zones, "*:*").each do |zone|
+  template "/etc/public-dnscache/root/servers/#{zone[:domain]}" do
+    source "dnscache-servers.erb"
+    mode 0644
+  end
 end
 
 @node[:djbdns][:ptr_networks].each do |network|
