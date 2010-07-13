@@ -36,7 +36,7 @@ template "/etc/tinydns-internal/root/zones/static.zone" do
   backup false
 end
 
-remote_file "/etc/tinydns-internal/root/valtz" do
+cookbook_file "/etc/tinydns-internal/root/valtz" do
   source "valtz"
   mode 0755
 end

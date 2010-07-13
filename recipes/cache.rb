@@ -39,7 +39,7 @@ search(:internal_zones, "*:*").each do |zone|
   end
 end
 
-@node[:djbdns][:ptr_networks].each do |network|
+node[:djbdns][:ptr_networks].each do |network|
   template "/etc/public-dnscache/root/servers/#{network}.in-addr.arpa" do
     source "dnscache-servers.erb"
     mode 0644
